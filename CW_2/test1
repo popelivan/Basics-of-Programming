@@ -1,0 +1,77 @@
+//Попель Іван, ПМП-11
+
+
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main() {
+    
+
+    int n, c = 20, b, temp, tempC = 0;
+
+    int masivA[10], masivB[10], masivC[20];
+
+    cout << "Enter the number of array elements А: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Input number " << i << ": ";
+        cin >> masivA[i];
+    }
+
+    
+
+    for (int i = 1; i < n; ++i)
+    {
+        for (int r = 0; r < n - i; r++)
+        {
+            if (masivA[r] > masivA[r + 1])
+            {
+               
+                int temp = masivA[r];
+                masivA[r] = masivA[r + 1];
+                masivA[r + 1] = temp;
+            }
+        }
+    }
+
+
+   
+
+    for (int i = 0; i < n; i++) {
+        cout << masivA[i] << " ";
+    }
+    cout << endl;
+    cout << "Enter the number of array elements B: ";
+    cin >> b;
+
+    for (int i = 0; i < b; i++) {
+        cout << "Input number " << i << ": ";
+        cin >> masivB[i];
+    }
+
+    
+
+    for (int i = 1; i < b; ++i)
+    {
+        for (int r = 0; r < b - i; r++)
+        {
+            if (masivB[r] < masivB[r + 1])
+            {
+              
+                int temp = masivB[r];
+                masivB[r] = masivB[r + 1];
+                masivB[r + 1] = temp;
+            }
+        }
+    }
+
+
+    for (int i = 0; i < b; i++) {
+        cout << masivB[i] << " ";
+    }
+    cout << endl;
+
+    system("pause");
