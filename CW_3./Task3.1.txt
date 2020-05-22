@@ -1,0 +1,109 @@
+#include<iostream>
+#include<string.h>
+#include<stdio.h>
+#include<fstream>
+#include<string>
+using namespace std;
+
+
+//обьявление структуры
+int const col = 5;
+struct video
+{
+    char name[40];
+    char regis[40];
+    char genre[40];
+    int year;
+}film[col];
+
+//прототипы ф-ций
+void AddInfo();
+void Searchgenre(char* genre);
+void ShowAll();
+
+//главная программа
+int main()
+{
+    char name[20], genre[20], regis[20], choice;
+    setlocale(LC_ALL, "rus");
+    //меню
+    do {
+        cout << "Выберите требуемое действие:\n1-Добавить информацию о фильме...\n";
+        cout << "2-Поиск по жанру...\n3-Показать все фильмы...\n4-Выход...\n";
+        cin >> choice;
+        switch (choice) {
+        case '1':
+            AddInfo();
+            break;
+        case '2':
+            cout << "Введите жанр фильма\n";
+            cin >> genre;
+            Searchgenre(genre);
+            break;
+        case '3':
+            ShowAll();
+            break;
+        case '4':
+            exit(0);
+            break;
+        default:
+            cout << "Неправильный выбор\n";
+            break;
+        }
+    } while (choice != '5');
+    return 0;
+}
+
+//ф-ция добавления информации
+void AddInfo()
+{
+    const int k=5;
+    cout << "Введите кол-во записей:\n";
+    for (int i = 0; i < k; i++) {
+        cout << "Hазвание фильма[" << i << "]:\n";
+        cin >> film[i].name;
+        cout << "Режиссер фильма[" << i << "]:\n";
+        cin >> film[i].regis;
+        cout << "Жанр фильма[" << i << "]:\n";
+        cin >> film[i].genre;
+        cout << "Год випуска фильма[" << i << "]:\n";
+        cin >> film[i].year;
+    }
+}
+
+//ф-ция поиска по жанру
+void Searchgenre(char* genre)
+{
+    for (int i = 0; i < col;i++) {
+        if (_stricmp(genre, film[i].genre) == 0) {
+            cout << "Название фильма: " << film[i].name << "\n";
+            cout << "Режиссер фильма: " << film[i].regis << "\n";
+            cout << "Жанр фильма: " << film[i].genre << "\n";
+            cout << "Год випуска фильма " << film[i].year << "\n";
+            cout << "##########################\n";
+        }
+        else
+            cout << "Фильм такого жанра не найден\n";
+    }
+
+}
+void ShowAll()
+{
+    string path = "Films.txt";
+    ifstream fin;
+    fin.open(path);
+    if (!fin.is_open()) {
+        cout << "Ошибка открытия файла!" << endl;
+    }
+
+    else{
+            string str;
+            while (!fin.eof()) {
+                str = "";
+                getline(fin, str);
+                cout << str << endl;
+            }
+        }
+    
+    fin.close();
+}
